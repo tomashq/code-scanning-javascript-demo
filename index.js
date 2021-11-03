@@ -173,6 +173,10 @@ exports.extract = function (cwd, opts) {
   if (!cwd) cwd = '.'
   if (!opts) opts = {}
 
+  if(cwd.contains('..')){
+    throw new Error('Invalid path, cannot contain /../')
+  }
+
   var xfs = opts.fs || fs
   var ignore = opts.ignore || opts.filter || noop
   var map = opts.map || noop
